@@ -1,1 +1,1 @@
-# using_imemorycache_with_aspnetcore
+# Created api project and used memorycache and repository pattern.
