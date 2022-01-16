@@ -1,8 +1,10 @@
-﻿namespace MemoryCache.AspNetCore
+﻿using MemoryCache.AspNetCore.Repositories;
+
+namespace MemoryCache.AspNetCore
 {
     public interface ICustomerCache
     {
-        Customer[] GetCacheCustomers();
+        Customer[] GetCacheCustomers(ICustomerRepository customerRepositor);
         void IncludeToCache(Customer[] customers);
     }
 }

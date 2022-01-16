@@ -1,5 +1,8 @@
+using MemoryCache.AspNetCore.Data;
+using MemoryCache.AspNetCore.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,12 +25,14 @@ namespace MemoryCache.AspNetCore
         {
 
             services.AddControllers();
+            services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("database"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MemoryCache.AspNetCore", Version = "v1" });
             });
             services.AddMemoryCache();
             services.AddSingleton<ICustomerCache, CustomerCache>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
